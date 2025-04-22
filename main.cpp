@@ -35,9 +35,10 @@ main()
         if (p != nullptr)
             pokemons.push_back(p);
     }
-    for (Pokemon* p : pokemons) {
-        p->afficher();
-    }
+    //for (Pokemon* p : pokemons) {
+    //    p->afficher();
+    //}
+    pokemons[0]->afficher_Mult();
 }
 
 //g++ main.cpp entraineur/entraineur.cpp entraineur/joueur.cpp pokemon/feu.cpp pokemon/pokemon.cpp -o main

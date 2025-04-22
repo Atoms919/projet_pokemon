@@ -1,5 +1,6 @@
 #pragma once
 #include "../main.h"
+#include "faiblesse_resistance.h"
 #include <string>
 
 class Pokemon
@@ -23,4 +24,12 @@ class Pokemon
         Pokemon(const string& nom, const string& t1, const string& t2, int pv, const string& attaque, int degat);
 
         void afficher() const;
+
+        map<string, float> multiplicateur_attaque() const;
+
+        void afficher_Mult() const;
+        map<string, float> getFaiblesses() const;
+        map<string, float> getResistances() const;
+
+        virtual void attaquer(Pokemon* cible) = 0; 
 };
