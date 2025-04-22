@@ -7,4 +7,6 @@ class Feu : public Pokemon
         Feu(const string& nom, const string& t2, int pv, const string& attaque, int degat);
 
         string* getType() const override;
+
+        void attaquer(Pokemon* cible) override; 
 };
