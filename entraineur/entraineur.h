@@ -10,4 +10,5 @@ class Entraineur
     public:
         string* getNom() const;
         vector<Pokemon*> getListe_pokemon() const;
+        Entraineur(string* n, vector<Pokemon*> lp);
 };
