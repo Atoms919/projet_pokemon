@@ -53,7 +53,7 @@ map<string, float> Pokemon::multiplicateur_attaque() const{
         mult[type] *= 0.5;
     }
 
-    if(type2!=nullptr)
+    if(type2!=nullptr&&*type2!="")
     {
         vector<string> faiblesse_2 = FAIBLESSES.find(*type2)->second;
         vector<string> resistance_2 = RESISTANCES.find(*type2)->second;
