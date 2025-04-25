@@ -1,6 +1,8 @@
 #include "main.h"
 #include "pokemon/pokemon.h"
 #include "pokemon/feu.h"
+#include "entraineur/joueur.h"
+#include "pokemon/feu.h"
 
 Pokemon* creerPokemonDepuisLigne(const string& ligneCSV) {
     stringstream ss(ligneCSV);
@@ -22,23 +24,46 @@ Pokemon* creerPokemonDepuisLigne(const string& ligneCSV) {
     return nullptr;
 }
 
-main()
-{
-    vector<Pokemon*> pokemons;
-    ifstream fichier("data/pokemon.csv");
-    string ligne;
-
-    getline(fichier, ligne);//saute l'entete
-
-    while (getline(fichier, ligne)) {
-        Pokemon* p = creerPokemonDepuisLigne(ligne);
-        if (p != nullptr)
-            pokemons.push_back(p);
+void AfficheStat(vector<Pokemon*> equipe){
+    for(Pokemon* p: equipe){ //pas encore faire si 2 type
+        p->afficher();
+    
     }
-    //for (Pokemon* p : pokemons) {
-    //    p->afficher();
-    //}
-    pokemons[0]->afficher_Mult();
-}
+};
+
+//devrait faire un attribut pv max
+void RecupPv(vector<Pokemon*> pokemon){
+
+} 
+
+int main()
+{
+    // vector<Pokemon*> pokemons;
+    // ifstream fichier("data/pokemon.csv");
+    // string ligne;
+
+    // getline(fichier, ligne);//saute l'entete
+
+    // while (getline(fichier, ligne)) {
+    //     Pokemon* p = creerPokemonDepuisLigne(ligne);
+    //     if (p != nullptr)
+    //         pokemons.push_back(p);
+    // }
+    // //for (Pokemon* p : pokemons) {
+    // //    p->afficher();
+    // //}
+    // pokemons[0]->afficher_Mult();
+
+    Pokemon* salameche = new Feu("Salamèche","Feu",39,"Flammèche",70);
+    vector<Pokemon*> equipe;
+    equipe.push_back(salameche);
+
+    Joueur* sacha = new Joueur("sacha", equipe, 0,0,0);
+
+    AfficheStat(equipe);
+  
+    return 0;
+
+};
 
 //g++ main.cpp entraineur/entraineur.cpp entraineur/joueur.cpp pokemon/feu.cpp pokemon/pokemon.cpp -o main
