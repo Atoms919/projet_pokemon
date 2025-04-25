@@ -42,7 +42,7 @@ int main()
     // ifstream fichier("data/pokemon.csv");
     // string ligne;
 
-    // getline(fichier, ligne);//saute l'entete
+    getline(fichier, ligne);//saute l'entete
 
     // while (getline(fichier, ligne)) {
     //     Pokemon* p = creerPokemonDepuisLigne(ligne);
