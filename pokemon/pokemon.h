@@ -10,6 +10,7 @@ class Pokemon
         string* type1;
         string* type2;
         int pv;
+        int PvMax;
         string* attaque;
         int degat;
     public :
@@ -17,6 +18,7 @@ class Pokemon
 
         string* getNom() const;
         int getPv() const;
+        int getPvMax() const;
         string* getAttaque() const;
         int getDegat() const;
         void setPv(int pv);

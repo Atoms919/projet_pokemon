@@ -2,6 +2,7 @@
 
 string* Pokemon::getNom() const {return nom;};
 int Pokemon::getPv() const {return pv;};
+int Pokemon::getPvMax() const {return PvMax;};
 string* Pokemon::getAttaque() const {return attaque;};
 int Pokemon::getDegat() const {return degat;};
 void Pokemon::setPv(int pv) {this->pv = pv;};
@@ -12,6 +13,7 @@ Pokemon::Pokemon(const string& nom, const string& t1, const string& t2, int pv, 
     type1 = new string(t1);
     type2 = new string(t2);
     this->pv = pv;
+    this->PvMax = pv;
     this->attaque = new string(attaque);
     this->degat = degat;
 };
@@ -110,4 +112,6 @@ map<string, float> Pokemon::getResistances() const
 
     return resistances;
 }
+
+
 

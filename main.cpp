@@ -3,6 +3,11 @@
 #include "pokemon/feu.h"
 #include "entraineur/joueur.h"
 #include "pokemon/feu.h"
+#include "pokemon/eau.h"
+#include "entraineur/leader_gym.h"
+#include "combat.h"
+
+
 
 Pokemon* creerPokemonDepuisLigne(const string& ligneCSV) {
     stringstream ss(ligneCSV);
@@ -24,17 +29,63 @@ Pokemon* creerPokemonDepuisLigne(const string& ligneCSV) {
     return nullptr;
 }
 
-void AfficheStat(vector<Pokemon*> equipe){
+void AfficheStatPokemon(vector<Pokemon*> equipe){
     for(Pokemon* p: equipe){ //pas encore faire si 2 type
         p->afficher();
     
     }
 };
 
-//devrait faire un attribut pv max
-void RecupPv(vector<Pokemon*> pokemon){
+void RecupPv(vector<Pokemon*> equipe){
+    for(Pokemon* p: equipe){
+        p->setPv(p->getPvMax());
+    }
+};
 
-} 
+//sans & modifie une copie
+void ChangerOrdre(vector<Pokemon*>& equipe, int idx1, int idx2){
+    Pokemon* tmp = equipe[idx1];
+    equipe[idx1] = equipe[idx2];
+    equipe[idx2] = tmp;
+}
+
+void AfficherStatJoueur(Joueur* j1){
+    cout << "Nombre de badge gagne: " << j1->getNb_badge() << endl;
+    cout << "Nombre de badge gagne: " << j1->getNb_victoire() << endl;
+    cout << "Nombre de badge gagne: " << j1->getNb_defaite() << endl;
+
+};
+
+//void AffronterGymnase()
+
+#define RESET   "\033[0m"
+#define BOLD    "\033[1m"
+#define GREEN   "\033[32m"
+#define CYAN    "\033[36m"
+#define YELLOW  "\033[33m"
+
+void afficherMenu() {
+    cout << CYAN << "===============================" << RESET << endl;
+    cout << BOLD << "         MENU PRINCIPAL        " << RESET << endl;
+    cout << CYAN << "===============================" << RESET << endl;
+    cout << GREEN << "1. Afficher equipe" << RESET << endl;
+    cout << GREEN << "2. Soigner les Pokemon" << RESET << endl;
+    cout << GREEN << "3. Changer ordre des Pokemon" << RESET << endl;
+    cout << GREEN << "4. Voir les stats du joueur" << RESET << endl;
+    cout << GREEN << "5. Affronter un gymnase" << RESET << endl;
+    cout << GREEN << "6. Affronter un maitre" << RESET << endl;
+    cout << GREEN << "7. Interagir avec les Pokemons ou entraineurs vaincus" << RESET << endl;
+
+    cout << YELLOW << "0. Quitter" << RESET << endl;
+    cout << CYAN << "===============================" << RESET << endl;
+    cout << "Votre choix : ";
+}
+
+void pause() {
+    cout << "\nAppuyez sur Entrée pour revenir au menu...";
+    cin.ignore(1000, '\n');
+    cin.get();
+}
 
 int main()
 {
@@ -42,7 +93,7 @@ int main()
     // ifstream fichier("data/pokemon.csv");
     // string ligne;
 
-    getline(fichier, ligne);//saute l'entete
+    //getline(fichier, ligne);//saute l'entete
 
     // while (getline(fichier, ligne)) {
     //     Pokemon* p = creerPokemonDepuisLigne(ligne);
@@ -52,16 +103,76 @@ int main()
     // //for (Pokemon* p : pokemons) {
     // //    p->afficher();
     // //}
-    // pokemons[0]->afficher_Mult();
+    // pokemons[0]->afficher_Mult();Carapuce,Eau,,44,Pistolet à O,65
 
-    Pokemon* salameche = new Feu("Salamèche","Feu",39,"Flammèche",70);
+
+    Pokemon* salameche = new Feu("Salameche","Feu",39,"Flammeche",70);
+    Pokemon* carapuce = new Eau("Carapuce","Eau",44,"Pistolet à O",65);
+
+    Pokemon* carabaffe = new Eau("Carabaffe","Eau",59,"Hydrocanon",80);
+    Pokemon* tortank = new Eau("Tortank","Eau",79,"Hydroblast",105);
+
+
     vector<Pokemon*> equipe;
     equipe.push_back(salameche);
+    equipe.push_back(carapuce);
+
+    vector<Pokemon*> equipe2;
+    equipe2.push_back(carabaffe);
+    equipe2.push_back(tortank);
 
     Joueur* sacha = new Joueur("sacha", equipe, 0,0,0);
+    
+    // AfficheStatPokemon(equipe);
+    // ChangerOrdre(equipe, 0 ,1);
+    // AfficheStatPokemon(equipe);
+    // AfficherStatJoueur(sacha);
 
-    AfficheStat(equipe);
-  
+    Leader_Gym* pierre = new Leader_Gym("pierre", equipe2, "Roche", "Bleu");
+    int choix;
+
+    do{ 
+        afficherMenu();
+        cin >> choix;
+        
+
+        switch(choix){
+            case 1: 
+                AfficheStatPokemon(equipe);
+                pause();
+                break;
+            case 2:
+                RecupPv(equipe);
+                cout << "Les pokemons ont ete soignes" << endl;
+                pause();
+                break;
+            case 3:
+            int i1, i2;
+                cout << "Entrer indice du premier Pokemon & echanger (0 à " << equipe.size()-1<< ") : ";
+                cin >> i1;
+                cout << "Et maintenant indice du second Pokemon : ";
+                cin >> i2;
+     
+                ChangerOrdre(equipe, i1, i2);
+                pause();
+                break;
+            case 4:
+                AfficherStatJoueur(sacha);
+                pause();
+                break;
+
+            case 5:
+                Combat* c = new Combat(*sacha, *pierre);
+                (*c).demarrer();
+                RecupPv(equipe2); //obligatoire sinon rejoue contre pokemon 0pv => bug
+                pause();
+                break;
+
+        };
+
+    } while (choix != 0);
+    
+
     return 0;
 
 };
