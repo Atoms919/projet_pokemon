@@ -128,7 +128,11 @@ int main()
     // AfficheStatPokemon(equipe);
     // AfficherStatJoueur(sacha);
 
+    
     Leader_Gym* pierre = new Leader_Gym("pierre", equipe2, "Roche", "Bleu");
+
+    vector<Leader_Gym*> leaders;
+    leaders.push_back(pierre);
     int choix;
 
     do{ 
@@ -162,11 +166,26 @@ int main()
                 break;
 
             case 5:
-                Combat* c = new Combat(*sacha, *pierre);
-                (*c).demarrer();
-                RecupPv(equipe2); //obligatoire sinon rejoue contre pokemon 0pv => bug
+                cout << "\n Choisis un gymnase à affronter"<<endl;
+
+                for(int i = 0; i <leaders.size(); i++){
+                    cout << i+1 <<". "<< *leaders[i]->getNom() << " (" << leaders[i]->getBadge()<<")"<<endl; //getNom retourn un string donc *
+                }
+                cout << "0. Retour" << endl;
+                int choix5;
+                cin >> choix5;
+                if(choix5> 0 && choix5<=leaders.size()){
+                    Combat* c = new Combat(*sacha, *leaders[choix5 -1]);
+                    (*c).demarrer();
+                    RecupPv(equipe2); //obligatoire sinon rejoue contre pokemon 0pv => bug
+                    
+                }
+                else {
+                    cout << "Retour au menu principal." << endl;
+                }
                 pause();
                 break;
+                
 
         };
 

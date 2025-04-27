@@ -73,8 +73,6 @@ bool Combat::demarrer() {
             }
 
             // Adversaire attaque   
-     
-
             cout << *p_adv->getNom() << " attaque " << *p_joueur->getNom() << " !" << endl;
             p_adv->attaquer(p_joueur);
 
