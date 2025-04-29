@@ -113,5 +113,9 @@ map<string, float> Pokemon::getResistances() const
     return resistances;
 }
 
+void Pokemon::interagir() const {
+    cout << *nom << " te passe le bonjour" << endl;
+}
+
 
 

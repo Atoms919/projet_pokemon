@@ -2,8 +2,9 @@
 #include "../main.h"
 #include "faiblesse_resistance.h"
 #include <string>
+#include "../interagir.h"
 
-class Pokemon
+class Pokemon: public Interagir
 {
     protected :
         string* nom;
@@ -34,4 +35,7 @@ class Pokemon
         map<string, float> getResistances() const;
 
         virtual void attaquer(Pokemon* cible) = 0; 
+
+        virtual void interagir() const override;
+        
 };

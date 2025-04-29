@@ -36,7 +36,22 @@ void pause(int milliseconds) {
     while (clock() < end_time) ;
 }
 
+//vérifier que joueur à bien tous ses pokemon avec pvmax
 bool Combat::demarrer() {
+    if(joueur.besoinSoin() == true){
+        cout << "Vos pokemons ont besoins de soin" << endl;
+        cout << "1. Les soigner" << endl;
+        int choix; 
+        cout << "Votre choix: " << endl;
+        cin >> choix;
+
+        if(choix == 1){
+            for(Pokemon* p: joueur.getListe_pokemon()){
+                p->setPv(p->getPvMax());
+            }
+        }
+
+    }
     cout << "===============================" << endl;
     cout << "Debut du combat entre " << *joueur.getNom() << " et " << *adversaire.getNom() << " !" << endl;
     cout << "===============================" << endl;
@@ -100,6 +115,12 @@ bool Combat::demarrer() {
     } else {
         cout << "\nVictoire ! Tu as battu " << *adversaire.getNom() << " !" << endl;
         joueur.setNb_victoire(joueur.getNb_victoire() + 1);
+        if(joueur.aVaincu(*adversaire.getNom()) == false){
+            joueur.ajouterLeaderVaincu(*adversaire.getNom());
+            joueur.setNb_badge(joueur.getNb_badge() + 1);
+            cout << "TEST" << endl;
+        }
+      
         return true;
     }
 }

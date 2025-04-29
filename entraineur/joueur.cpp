@@ -8,6 +8,24 @@ void Joueur::setNb_badge(int nb){nb_badge=nb;};
 void Joueur::setNb_victoire(int nb){nb_victoire=nb;};
 void Joueur::setNb_defaite(int nb){nb_defaite=nb;};
 
+bool Joueur::aVaincu(string nomLeader) const{
+    return find(leaders_vaincus.begin(), leaders_vaincus.end(), nomLeader)  != leaders_vaincus.end();
+}
+
+void Joueur::ajouterLeaderVaincu(string nomLeader){
+    leaders_vaincus.push_back(nomLeader);
+}
+
+bool Joueur::besoinSoin(){
+    for(Pokemon* p: liste_pokemon){
+        if(p->getPv() < p->getPvMax()){
+            return true;
+        } 
+    }
+    return false;
+}
+
+
 Joueur::Joueur(const string& nom, vector<Pokemon*> equipe, int badge, int victoire, int defaite):
 Entraineur(new string(nom), equipe){
     nb_badge = badge;

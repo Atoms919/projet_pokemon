@@ -9,5 +9,7 @@
 #include <map>
 #include <thread>
 #include <chrono>
-
+#include <cstdlib>  // Pour rand()
+#include <ctime>    // Pour time()
+#include <algorithm>
 using namespace std;

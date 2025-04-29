@@ -6,6 +6,7 @@
 #include "pokemon/eau.h"
 #include "entraineur/leader_gym.h"
 #include "combat.h"
+#include "entraineur/maitre.h"
 
 
 
@@ -106,8 +107,8 @@ int main()
     // pokemons[0]->afficher_Mult();Carapuce,Eau,,44,Pistolet à O,65
 
 
-    Pokemon* salameche = new Feu("Salameche","Feu",39,"Flammeche",70);
-    Pokemon* carapuce = new Eau("Carapuce","Eau",44,"Pistolet à O",65);
+    Pokemon* salameche = new Feu("Salameche","Feu",300,"Flammeche",70);
+    Pokemon* carapuce = new Eau("Carapuce","Eau",400,"Pistolet à O",65);
 
     Pokemon* carabaffe = new Eau("Carabaffe","Eau",59,"Hydrocanon",80);
     Pokemon* tortank = new Eau("Tortank","Eau",79,"Hydroblast",105);
@@ -135,6 +136,16 @@ int main()
     leaders.push_back(pierre);
     int choix;
 
+    Pokemon* p1 = new Eau("Nidoran♀","Poison",55,"Dard-Venin",60);
+    Pokemon* p2 = new Eau("Nidoran♀","Poison",55,"Dard-Venin",60);
+
+    vector<Pokemon*> equipeMaitre;
+    equipeMaitre.push_back(p1);
+    equipeMaitre.push_back(p2);
+
+    Maitre* regis = new Maitre("Regis", equipeMaitre, 0.25);
+    vector<Maitre*> masters;
+    masters.push_back(regis);
     do{ 
         afficherMenu();
         cin >> choix;
@@ -185,6 +196,47 @@ int main()
                 }
                 pause();
                 break;
+
+            case 6: 
+                cout << sacha->getNb_badge() <<endl;
+                if(sacha->getNb_badge() == leaders.size()){
+                    cout << "\n Choisis un maitre à affronter" << endl;
+                    for(int i = 0; i<masters.size(); i ++){
+                        Combat* c2 = new Combat(*sacha, *masters[i]);
+                        c2->demarrer();
+                        RecupPv(equipe2);
+                    }
+
+                } else {
+                    cout <<"\n Vous n'avez pas obtenu tous les badges" << endl;
+                }
+
+                pause();
+                break;
+            
+            case 7: 
+                int choixInteragir;
+                cout << "7. Interagir avec Pokémon ou Entraîneur vaincu" <<endl;
+                cout << "➔ 1. Interagir avec un Pokémon" << endl;
+                cout << "➔ 2. Interagir avec un Leader vaincu" << endl;
+                cout << "votre choix: " << endl;
+
+                cin >> choixInteragir;
+
+                if(choixInteragir == 1){
+                    int choixPokemon; 
+
+                    cout << "Sélectionner un Pokemon: " <<endl;
+                    for(int i = 0; i < sacha->getListe_pokemon().size();i++){
+                        cout << i+1<<". " << *sacha->getListe_pokemon()[i]->getNom() << endl;
+
+                    }
+                    cin >> choixPokemon;
+                    sacha->getListe_pokemon()[choixPokemon -1]->interagir();
+                }
+                pause();
+                break;
+                
                 
 
         };

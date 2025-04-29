@@ -1,8 +1,9 @@
 #pragma once
 #include "../main.h"
 #include "../pokemon/pokemon.h"
+#include "../interagir.h"
 
-class Entraineur
+class Entraineur: public Interagir
 {
     protected:
         string* nom;
@@ -10,5 +11,7 @@ class Entraineur
     public:
         string* getNom() const;
         vector<Pokemon*> getListe_pokemon() const;
+        virtual void interagir() const override;
+
         Entraineur(string* n, vector<Pokemon*> lp);
 };
