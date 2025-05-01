@@ -115,10 +115,10 @@ bool Combat::demarrer() {
     } else {
         cout << "\nVictoire ! Tu as battu " << *adversaire.getNom() << " !" << endl;
         joueur.setNb_victoire(joueur.getNb_victoire() + 1);
-        if(joueur.aVaincu(*adversaire.getNom()) == false){
-            joueur.ajouterLeaderVaincu(*adversaire.getNom());
+        if (!joueur.aVaincu(&adversaire)) {
+            joueur.ajouterVaincu(&adversaire);
             joueur.setNb_badge(joueur.getNb_badge() + 1);
-            cout << "TEST" << endl;
+
         }
       
         return true;

@@ -234,6 +234,22 @@ int main()
                     cin >> choixPokemon;
                     sacha->getListe_pokemon()[choixPokemon -1]->interagir();
                 }
+
+                else if(choixInteragir == 2){
+                    vector<Entraineur*> vaincus = sacha->getVaincus();
+                    if (vaincus.empty()) {
+                        cout << "Aucun leader vaincu pour l’instant." << endl;
+                    } else {
+                        cout << "Choisis un leader à saluer : " << endl;
+                        for (int i = 0; i < vaincus.size(); ++i) {
+                            cout << i + 1 << ". " << *vaincus[i]->getNom() << endl;
+                        }
+                        int choixLeader;
+                        cin >> choixLeader;
+                        vaincus[choixLeader - 1]->interagir();
+                    }
+                }
+                
                 pause();
                 break;
                 
