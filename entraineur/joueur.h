@@ -25,4 +25,4 @@ class Joueur : public Entraineur
         bool besoinSoin();
 
         Joueur(const string& nom, vector<Pokemon*> equipe, int badge, int victoire, int defaite);
-};
+}; 
