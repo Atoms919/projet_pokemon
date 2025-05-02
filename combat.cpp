@@ -66,7 +66,7 @@ bool Combat::demarrer() {
         Pokemon* p_joueur = equipe_joueur[idx_joueur];
         Pokemon* p_adv = equipe_adversaire[idx_adv];
 
-        cout << "\n" << *joueur.getNom() << " utilise " << *p_joueur->getNom() << " !" << endl;
+        cout << "\n" << *joueur.getNom() << " utilise " << *p_joueur->getNom() << " !" << p_joueur->getPv()<< endl;
         cout << *adversaire.getNom() << " utilise " << *p_adv->getNom() << " !" << endl;
 
         pause(400);

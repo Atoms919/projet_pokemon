@@ -10,7 +10,7 @@ class Entraineur: public Interagir
         vector<Pokemon*> liste_pokemon;
     public:
         string* getNom() const;
-        vector<Pokemon*> getListe_pokemon() const;
+        vector<Pokemon*>& getListe_pokemon();
         virtual void interagir() const override;
 
         Entraineur(string* n, vector<Pokemon*> lp);
