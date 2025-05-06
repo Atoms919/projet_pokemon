@@ -12,3 +12,7 @@ void Plante::attaquer(Pokemon* cible)
     if (pv_final<0) pv_final = 0;
     cible->setPv(pv_final);
 };
+
+void Plante::interagir() const{
+    cout << "🌿 ["<<*nom<<"] fait pousser une petite fleur à tes pieds en guise de salut." << endl;
+}

@@ -9,4 +9,6 @@ class Eau : public Pokemon
         string* getType() const override;
 
         void attaquer(Pokemon* cible) override; 
+        virtual void interagir() const override;
+
 };

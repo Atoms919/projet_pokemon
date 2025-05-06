@@ -12,6 +12,8 @@
 #include <cstdlib>  // Pour rand()
 #include <ctime>    // Pour time()
 #include <algorithm>
+#include <windows.h>
+
 using namespace std;
 
 
