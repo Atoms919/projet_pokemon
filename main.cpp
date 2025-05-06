@@ -93,12 +93,11 @@ vector<Maitre*> chargerMaitresDepuisCSV(const string& nomFichier, const map<stri
 
     while (getline(fichier, ligne)) {
         stringstream ss(ligne);
-        string nom, badge;
+        string nom;
         vector<Pokemon*> equipe;
         string champ;
 
         getline(ss, nom, ',');     // nom du maître
-        getline(ss, badge, ',');   // badge ou titre (ex: "Pokémon Champion")
 
         while (getline(ss, champ, ',')) {
             if (!champ.empty() && pokedex.count(champ)) {
@@ -207,7 +206,7 @@ void pause() {
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
-    
+
     map<string, Pokemon*> pokedex = chargerPokedex("data/pokemon.csv");
     vector<Leader_Gym*> tousLesLeaders = chargerLeadersDepuisCSV("data/leaders.csv", pokedex);
     vector<Joueur*> tousLesJoueurs = chargerJoueursDepuisCSV("data/joueur.csv", pokedex);
@@ -270,7 +269,7 @@ int main()
     
             case 6:
                     cout << joueurActif->getNb_badge() << " badge(s) obtenu(s)." << endl;
-
+                    joueurActif->setNb_badge(tousLesLeaders.size());
                     if (joueurActif->getNb_badge() == tousLesLeaders.size()) {
                         cout << "\nChoisis un maître à affronter :" << endl;
                     
