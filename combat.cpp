@@ -62,49 +62,70 @@ bool Combat::demarrer() {
     int idx_joueur = 0;
     int idx_adv = 0;
 
+    int tour = 0; //pour savoir qui attaque (pair: joueur, impair: adversaire) 
+
     while (idx_joueur < equipe_joueur.size() && idx_adv < equipe_adversaire.size()) {
         Pokemon* p_joueur = equipe_joueur[idx_joueur];
         Pokemon* p_adv = equipe_adversaire[idx_adv];
 
-        cout << "\n" << *joueur.getNom() << " utilise " << *p_joueur->getNom() << " !" << p_joueur->getPv()<< endl;
-        cout << *adversaire.getNom() << " utilise " << *p_adv->getNom() << " !" << endl;
+        cout << "\n" << *joueur.getNom() << " utilise " << *p_joueur->getNom() << " !" << endl;
+        cout << *adversaire.getNom() << " utilise " << *p_adv->getNom() << " !" << endl;  
 
-        pause(400);
-        while (p_joueur->getPv() > 0 && p_adv->getPv() > 0) {
-            // Joueur attaque
-            cout << *p_joueur->getNom() << " attaque " << *p_adv->getNom() << " !" << endl;
-            p_joueur->attaquer(p_adv);
-            cout << "[Joueur]"<<*p_joueur->getNom() << " : ";
-            afficherVie(p_joueur);
-            cout << "[Leader]"<< *p_adv->getNom() << " : ";
-            afficherVie(p_adv);
-
-            pause(400);
-            
+        if (p_adv->getPv() <= 0||p_joueur->getPv() <= 0)
+        {
             if (p_adv->getPv() <= 0) {
                 cout << *p_adv->getNom() << " est K.O !" << endl;
                 idx_adv++;
-                break;
             }
-
-            // Adversaire attaque   
-            cout << *p_adv->getNom() << " attaque " << *p_joueur->getNom() << " !" << endl;
-            p_adv->attaquer(p_joueur);
-
-            cout << "[Joueur]"<<*p_joueur->getNom() << " : ";
-            afficherVie(p_joueur);
-            cout << "[Leader]"<< *p_adv->getNom() << " : ";
-            afficherVie(p_adv);
-
-            pause(400);
-
-           
             if (p_joueur->getPv() <= 0) {
                 cout << *p_joueur->getNom() << " est K.O !" << endl;
                 idx_joueur++;
-                break;
             }
-        }
+        }       
+        else
+        {
+            pause(400);
+            while (p_joueur->getPv() > 0 && p_adv->getPv() > 0)  
+            {            
+                if (tour%2 == 0)// Joueur attaque
+                {                    
+                    tour++; 
+                    cout << *p_joueur->getNom() << " attaque " << *p_adv->getNom() << " !" << endl;
+                    p_joueur->attaquer(p_adv);
+                    cout << "[Joueur - "<<*joueur.getNom()<<"]"<<*p_joueur->getNom() << " : ";
+                    afficherVie(p_joueur);
+                    cout << "[Leader - "<<*adversaire.getNom()<<"]"<< *p_adv->getNom() << " : ";
+                    afficherVie(p_adv);
+
+                    pause(400);
+                    
+                    if (p_adv->getPv() <= 0) {
+                        cout << *p_adv->getNom() << " est K.O !" << endl;
+                        idx_adv++;
+                        break;
+                    }
+                }
+                else // Adversaire attaque 
+                {   
+                    tour++;     
+                    cout << *p_adv->getNom() << " attaque " << *p_joueur->getNom() << " !" << endl;
+                    p_adv->attaquer(p_joueur);
+
+                    cout << "[Joueur - "<<*joueur.getNom()<<"]" <<*p_joueur->getNom() << " : ";
+                    afficherVie(p_joueur);
+                    cout << "[Leader - "<<*adversaire.getNom()<<"]"<< *p_adv->getNom() << " : ";
+                    afficherVie(p_adv);
+
+                    pause(400);
+
+                    if (p_joueur->getPv() <= 0) {
+                        cout << *p_joueur->getNom() << " est K.O !" << endl;
+                        idx_joueur++;
+                        break;
+                    } 
+                }                        
+            }
+        }        
     }
 
     // Fin du combat
@@ -112,7 +133,8 @@ bool Combat::demarrer() {
         cout << "\nDéfaite... " << *adversaire.getNom() << " t'a vaincu !" << endl;
         joueur.setNb_defaite(joueur.getNb_defaite() + 1);
         return false;
-    } else {
+    } 
+    else {
         cout << "\nVictoire ! Tu as battu " << *adversaire.getNom() << " !" << endl;
         joueur.setNb_victoire(joueur.getNb_victoire() + 1);
         if (!joueur.aVaincu(&adversaire)) {

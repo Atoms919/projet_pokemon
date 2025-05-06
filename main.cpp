@@ -192,68 +192,13 @@ void pause() {
 
 int main()
 {
-    // vector<Pokemon*> pokemons;
-    // ifstream fichier("data/pokemon.csv");
-    // string ligne;
-
-    //getline(fichier, ligne);//saute l'entete
-
-    // while (getline(fichier, ligne)) {
-    //     Pokemon* p = creerPokemonDepuisLigne(ligne);
-    //     if (p != nullptr)
-    //         pokemons.push_back(p);
-    // }
-    // //for (Pokemon* p : pokemons) {
-    // //    p->afficher();
-    // //}
-    // pokemons[0]->afficher_Mult();Carapuce,Eau,,44,Pistolet à O,65
-
     map<string, Pokemon*> pokedex = chargerPokedex("data/pokemon.csv");
     vector<Leader_Gym*> tousLesLeaders = chargerLeadersDepuisCSV("data/leaders.csv", pokedex);
     vector<Joueur*> tousLesJoueurs = chargerJoueursDepuisCSV("data/joueur.csv", pokedex);
     Joueur* joueurActif = tousLesJoueurs[0]; // Par défaut : Sacha
     vector<Maitre*> maitres = chargerMaitresDepuisCSV("data/maitres.csv", pokedex);
 
-
-    Pokemon* salameche = new Feu("Salameche","Feu",300,"Flammeche",70);
-    Pokemon* carapuce = new Eau("Carapuce","Eau",400,"Pistolet à O",65);
-
-    Pokemon* carabaffe = new Eau("Carabaffe","Eau",59,"Hydrocanon",80);
-    Pokemon* tortank = new Eau("Tortank","Eau",79,"Hydroblast",105);
-
-
-    vector<Pokemon*> equipe;
-    equipe.push_back(salameche);
-    equipe.push_back(carapuce);
-
-    vector<Pokemon*> equipe2;
-    equipe2.push_back(carabaffe);
-    equipe2.push_back(tortank);
-
-    Joueur* sacha = new Joueur("sacha", equipe, 0,0,0);
-    
-    // AfficheStatPokemon(equipe);
-    // ChangerOrdre(equipe, 0 ,1);
-    // AfficheStatPokemon(equipe);
-    // AfficherStatJoueur(sacha);
-
-    
-    Leader_Gym* pierre = new Leader_Gym("pierre", equipe2, "Roche", "Bleu");
-
-    vector<Leader_Gym*> leaders;
-    leaders.push_back(pierre);
     int choix;
-
-    Pokemon* p1 = new Eau("Nidoran♀","Poison",55,"Dard-Venin",60);
-    Pokemon* p2 = new Eau("Nidoran♀","Poison",55,"Dard-Venin",60);
-
-    vector<Pokemon*> equipeMaitre;
-    equipeMaitre.push_back(p1);
-    equipeMaitre.push_back(p2);
-
-    Maitre* regis = new Maitre("Regis", equipeMaitre, 0.25);
-    vector<Maitre*> masters;
-    masters.push_back(regis);
     do {
         afficherMenu();
         cin >> choix;
@@ -339,8 +284,8 @@ int main()
             case 7:
                 int choixInteragir;
                 cout << "7. Interagir avec Pokémon ou Entraîneur vaincu" << endl;
-                cout << "➔ 1. Interagir avec un Pokémon" << endl;
-                cout << "➔ 2. Interagir avec un Leader vaincu" << endl;
+                cout << "-> 1. Interagir avec un Pokémon" << endl;
+                cout << "-> 2. Interagir avec un Leader vaincu" << endl;
                 cout << "Votre choix : ";
                 cin >> choixInteragir;
     
@@ -396,4 +341,4 @@ int main()
 
 };
 
-//g++ main.cpp entraineur/entraineur.cpp entraineur/joueur.cpp pokemon/feu.cpp pokemon/pokemon.cpp -o main
+//g++ main.cpp entraineur/entraineur.cpp entraineur/joueur.cpp pokemon/feu.cpp pokemon/eau.cpp pokemon/plante.cpp pokemon/pokemon.cpp entraineur/leader_gym.cpp combat.cpp entraineur/maitre.cpp -o main
