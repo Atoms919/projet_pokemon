@@ -92,9 +92,9 @@ bool Combat::demarrer() {
                     tour++; 
                     cout << *p_joueur->getNom() << " attaque " << *p_adv->getNom() << " !" << endl;
                     p_joueur->attaquer(p_adv);
-                    cout << "[Joueur - "<<*joueur.getNom()<<"]"<<*p_joueur->getNom() << " : ";
+                    cout << "[Joueur - "<<*joueur.getNom()<<"] "<<*p_joueur->getNom() << " : ";
                     afficherVie(p_joueur);
-                    cout << "[Leader - "<<*adversaire.getNom()<<"]"<< *p_adv->getNom() << " : ";
+                    cout << "[Leader - "<<*adversaire.getNom()<<"] "<< *p_adv->getNom() << " : ";
                     afficherVie(p_adv);
 
                     pause(400);
@@ -111,9 +111,9 @@ bool Combat::demarrer() {
                     cout << *p_adv->getNom() << " attaque " << *p_joueur->getNom() << " !" << endl;
                     p_adv->attaquer(p_joueur);
 
-                    cout << "[Joueur - "<<*joueur.getNom()<<"]" <<*p_joueur->getNom() << " : ";
+                    cout << "[Joueur - "<<*joueur.getNom()<<"] " <<*p_joueur->getNom() << " : ";
                     afficherVie(p_joueur);
-                    cout << "[Leader - "<<*adversaire.getNom()<<"]"<< *p_adv->getNom() << " : ";
+                    cout << "[Leader - "<<*adversaire.getNom()<<"] "<< *p_adv->getNom() << " : ";
                     afficherVie(p_adv);
 
                     pause(400);

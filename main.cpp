@@ -206,6 +206,8 @@ void pause() {
 
 int main()
 {
+    SetConsoleOutputCP(CP_UTF8);
+    
     map<string, Pokemon*> pokedex = chargerPokedex("data/pokemon.csv");
     vector<Leader_Gym*> tousLesLeaders = chargerLeadersDepuisCSV("data/leaders.csv", pokedex);
     vector<Joueur*> tousLesJoueurs = chargerJoueursDepuisCSV("data/joueur.csv", pokedex);
