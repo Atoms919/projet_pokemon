@@ -43,6 +43,7 @@ bool Combat::demarrer() {
     if(joueur.besoinSoin() == true){
         cout << "Vos pokemons ont besoins de soin" << endl;
         cout << "1. Les soigner" << endl;
+        cout << "2. Ne pas les soigner" << endl;
         int choix; 
         cout << "Votre choix: " << endl;
         cin >> choix;
