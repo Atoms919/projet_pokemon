@@ -43,6 +43,17 @@ map<string, Pokemon*> chargerPokedex(const string& nomFichier) {
     return pokedex;
 }
 
+Pokemon* copierDepuisPokedex(const string& nom, const map<string, Pokemon*>& pokedex) {
+    if (pokedex.count(nom)) {
+        Pokemon* original = pokedex.at(nom);
+        if (Feu* f = dynamic_cast<Feu*>(original)) return new Feu(*f);
+        if (Eau* e = dynamic_cast<Eau*>(original)) return new Eau(*e);
+        if (Plante* p = dynamic_cast<Plante*>(original)) return new Plante(*p);
+    }
+    return nullptr;
+}
+
+
 vector<Leader_Gym*> chargerLeadersDepuisCSV(const string& nomFichier, const map<string, Pokemon*>& pokedex) {
     vector<Leader_Gym*> leaders;
     ifstream fichier(nomFichier);
@@ -62,7 +73,8 @@ vector<Leader_Gym*> chargerLeadersDepuisCSV(const string& nomFichier, const map<
 
         while (getline(ss, champ, ',')) {
             if (!champ.empty() && pokedex.count(champ)) {
-                equipe.push_back(pokedex.at(champ));
+                Pokemon* copie = copierDepuisPokedex(champ, pokedex);
+                if (copie) equipe.push_back(copie);
             }
         }
 
@@ -90,7 +102,8 @@ vector<Maitre*> chargerMaitresDepuisCSV(const string& nomFichier, const map<stri
 
         while (getline(ss, champ, ',')) {
             if (!champ.empty() && pokedex.count(champ)) {
-                equipe.push_back(pokedex.at(champ));
+                Pokemon* copie = copierDepuisPokedex(champ, pokedex);
+                if (copie) equipe.push_back(copie);
             }
         }
 
@@ -118,7 +131,8 @@ vector<Joueur*> chargerJoueursDepuisCSV(const string& nomFichier, const map<stri
 
         while (getline(ss, champ, ',')) {
             if (!champ.empty() && pokedex.count(champ)) {
-                equipe.push_back(pokedex.at(champ));
+                Pokemon* copie = copierDepuisPokedex(champ, pokedex);
+                if (copie) equipe.push_back(copie);
             }
         }
 
@@ -153,8 +167,8 @@ void ChangerOrdre(vector<Pokemon*>& equipe, int idx1, int idx2){
 
 void AfficherStatJoueur(Joueur* j1){
     cout << "Nombre de badge gagne: " << j1->getNb_badge() << endl;
-    cout << "Nombre de badge gagne: " << j1->getNb_victoire() << endl;
-    cout << "Nombre de badge gagne: " << j1->getNb_defaite() << endl;
+    cout << "Nombre de victoire: " << j1->getNb_victoire() << endl;
+    cout << "Nombre de défaite: " << j1->getNb_defaite() << endl;
 
 };
 
@@ -192,6 +206,8 @@ void pause() {
 
 int main()
 {
+    SetConsoleOutputCP(CP_UTF8);
+
     // vector<Pokemon*> pokemons;
     // ifstream fichier("data/pokemon.csv");
     // string ligne;

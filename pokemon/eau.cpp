@@ -12,3 +12,7 @@ void Eau::attaquer(Pokemon* cible)
     if (pv_final<0) pv_final = 0;
     cible->setPv(pv_final);
 };
+
+void Eau::interagir() const{
+    cout << "💧 ["<<*nom<<"] fait gicler de l’eau fraîche autour de toi, joyeux comme un poisson dans l’eau." << endl;
+}

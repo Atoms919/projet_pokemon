@@ -12,3 +12,7 @@ void Feu::attaquer(Pokemon* cible)
     if (pv_final<0) pv_final = 0;
     cible->setPv(pv_final);
 };
+
+void Feu::interagir() const{
+    cout << "🔥 ["<<*nom<<"] crache une petite flamme pour te montrer son affection." << endl;
+}
