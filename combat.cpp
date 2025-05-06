@@ -1,5 +1,7 @@
 #include "combat.h"
-
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
 
 Combat::Combat(Joueur& j, Entraineur& e) : joueur(j), adversaire(e) {}
 
@@ -26,8 +28,8 @@ void afficherVie(Pokemon* p) {
     int remplissage = (pv_actuel * barre) / pv_max;
 
     cout << "[";
-    for (int i = 0; i < remplissage; ++i) cout << "-";
-    for (int i = remplissage; i < barre; ++i) cout << " ";
+    for (int i = 0; i < remplissage; ++i) cout << "🟩";
+    for (int i = remplissage; i < barre; ++i) cout << "⬜";
     cout << "] (" << pv_actuel << "/" << pv_max << " PV)" << endl;
 }
 
@@ -68,8 +70,8 @@ bool Combat::demarrer() {
         Pokemon* p_joueur = equipe_joueur[idx_joueur];
         Pokemon* p_adv = equipe_adversaire[idx_adv];
 
-        cout << "\n" << *joueur.getNom() << " utilise " << *p_joueur->getNom() << " !" << endl;
-        cout << *adversaire.getNom() << " utilise " << *p_adv->getNom() << " !" << endl;  
+        cout << "\n" << GREEN << *joueur.getNom() << " utilise " << *p_joueur->getNom() << " !" << endl;
+        cout << RED << *adversaire.getNom() << " utilise " << *p_adv->getNom() << " !" << RESET << endl;  
 
         if (p_adv->getPv() <= 0||p_joueur->getPv() <= 0)
         {
@@ -92,9 +94,9 @@ bool Combat::demarrer() {
                     tour++; 
                     cout << *p_joueur->getNom() << " attaque " << *p_adv->getNom() << " !" << endl;
                     p_joueur->attaquer(p_adv);
-                    cout << "[Joueur - "<<*joueur.getNom()<<"] "<<*p_joueur->getNom() << " : ";
+                    cout  << GREEN << "[Joueur - "<<*joueur.getNom()<<"] " << RESET <<*p_joueur->getNom() << " : ";
                     afficherVie(p_joueur);
-                    cout << "[Leader - "<<*adversaire.getNom()<<"] "<< *p_adv->getNom() << " : ";
+                    cout << RED << "[Leader - "<<*adversaire.getNom()<<"] " << RESET << *p_adv->getNom() << " : ";
                     afficherVie(p_adv);
 
                     pause(400);
@@ -111,9 +113,9 @@ bool Combat::demarrer() {
                     cout << *p_adv->getNom() << " attaque " << *p_joueur->getNom() << " !" << endl;
                     p_adv->attaquer(p_joueur);
 
-                    cout << "[Joueur - "<<*joueur.getNom()<<"] " <<*p_joueur->getNom() << " : ";
+                    cout  << GREEN << "[Joueur - "<<*joueur.getNom()<<"] " << RESET <<*p_joueur->getNom() << " : ";
                     afficherVie(p_joueur);
-                    cout << "[Leader - "<<*adversaire.getNom()<<"] "<< *p_adv->getNom() << " : ";
+                    cout << RED << "[Leader - "<<*adversaire.getNom()<<"] " << RESET << *p_adv->getNom() << " : ";
                     afficherVie(p_adv);
 
                     pause(400);
@@ -130,12 +132,12 @@ bool Combat::demarrer() {
 
     // Fin du combat
     if (idx_joueur >= equipe_joueur.size()) {
-        cout << "\nDéfaite... " << *adversaire.getNom() << " t'a vaincu !" << endl;
+        cout << RED << "\nDéfaite... " << *adversaire.getNom() << " t'a vaincu !" << RESET << endl;
         joueur.setNb_defaite(joueur.getNb_defaite() + 1);
         return false;
     } 
     else {
-        cout << "\nVictoire ! Tu as battu " << *adversaire.getNom() << " !" << endl;
+        cout << GREEN << "\nVictoire ! Tu as battu " << *adversaire.getNom() << " !" << RESET << endl;
         joueur.setNb_victoire(joueur.getNb_victoire() + 1);
         if (!joueur.aVaincu(&adversaire)) {
             joueur.ajouterVaincu(&adversaire);
