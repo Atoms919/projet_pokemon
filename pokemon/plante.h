@@ -8,7 +8,7 @@ class Plante : public Pokemon
 
         string* getType() const override;
 
-        void attaquer(Pokemon* cible) override; 
+        void attaquer(Pokemon* cible, float boost = 1) override; 
         virtual void interagir() const override;
 
 };

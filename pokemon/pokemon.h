@@ -34,7 +34,7 @@ class Pokemon: public Interagir
         map<string, float> getFaiblesses() const;
         map<string, float> getResistances() const;
 
-        virtual void attaquer(Pokemon* cible) = 0; 
+        virtual void attaquer(Pokemon* cible, float boost = 1) = 0; 
 
         virtual void interagir() const override;
         

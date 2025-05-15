@@ -1,6 +1,7 @@
 #pragma once 
 #include "main.h"
 #include "entraineur/entraineur.h"
+#include "entraineur/maitre.h"
 #include "entraineur/joueur.h"
 
 class Combat {

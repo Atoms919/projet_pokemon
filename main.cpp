@@ -106,7 +106,7 @@ vector<Maitre*> chargerMaitresDepuisCSV(const string& nomFichier, const map<stri
             }
         }
 
-        maitres.push_back(new Maitre(nom, equipe, 0.25));
+        maitres.push_back(new Maitre(nom, equipe, 1.25));
     }
 
     return maitres;

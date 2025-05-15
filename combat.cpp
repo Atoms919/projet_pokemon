@@ -67,6 +67,12 @@ bool Combat::demarrer() {
 
     int tour = 0; //pour savoir qui attaque (pair: joueur, impair: adversaire) 
 
+    double boost = 1;
+    Maitre* maitre = dynamic_cast<Maitre*>(&adversaire);
+    if (maitre != nullptr) {
+        boost = maitre->getBoost();
+    }
+
     while (idx_joueur < equipe_joueur.size() && idx_adv < equipe_adversaire.size()) {
         Pokemon* p_joueur = equipe_joueur[idx_joueur];
         Pokemon* p_adv = equipe_adversaire[idx_adv];
@@ -113,8 +119,7 @@ bool Combat::demarrer() {
                 {   
                     tour++;     
                     cout << *p_adv->getNom() << " attaque " << *p_joueur->getNom() << " !" << endl;
-                    p_adv->attaquer(p_joueur);
-
+                    p_adv->attaquer(p_joueur, boost);
                     cout  << GREEN << "[Joueur - "<<*joueur.getNom()<<"] " << RESET <<*p_joueur->getNom() << " : ";
                     afficherVie(p_joueur);
                     cout << RED << "[Leader - "<<*adversaire.getNom()<<"] " << RESET << *p_adv->getNom() << " : ";
