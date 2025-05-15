@@ -55,9 +55,9 @@ bool Combat::demarrer() {
         }
 
     }
-    cout << "===============================" << endl;
+    cout << "=====================================" << endl;
     cout << "Debut du combat entre " << *joueur.getNom() << " et " << *adversaire.getNom() << " !" << endl;
-    cout << "===============================" << endl;
+    cout << "=====================================" << endl;
 
     vector<Pokemon*> equipe_joueur = joueur.getListe_pokemon();
     vector<Pokemon*> equipe_adversaire = adversaire.getListe_pokemon();
@@ -87,7 +87,7 @@ bool Combat::demarrer() {
         }       
         else
         {
-            pause(400);
+            cout<<endl;
             while (p_joueur->getPv() > 0 && p_adv->getPv() > 0)  
             {            
                 if (tour%2 == 0)// Joueur attaque
@@ -99,9 +99,10 @@ bool Combat::demarrer() {
                     afficherVie(p_joueur);
                     cout << RED << "[Leader - "<<*adversaire.getNom()<<"] " << RESET << *p_adv->getNom() << " : ";
                     afficherVie(p_adv);
+                    cout<<endl;
+                    system("PAUSE");
+                    cout<<endl;
 
-                    pause(400);
-                    
                     if (p_adv->getPv() <= 0) {
                         cout << *p_adv->getNom() << " est K.O !" << endl;
                         idx_adv++;
@@ -118,8 +119,9 @@ bool Combat::demarrer() {
                     afficherVie(p_joueur);
                     cout << RED << "[Leader - "<<*adversaire.getNom()<<"] " << RESET << *p_adv->getNom() << " : ";
                     afficherVie(p_adv);
-
-                    pause(400);
+                    cout<<endl;
+                    system("PAUSE");
+                    cout<<endl;
 
                     if (p_joueur->getPv() <= 0) {
                         cout << *p_joueur->getNom() << " est K.O !" << endl;

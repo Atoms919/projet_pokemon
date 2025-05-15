@@ -97,7 +97,7 @@ vector<Maitre*> chargerMaitresDepuisCSV(const string& nomFichier, const map<stri
         vector<Pokemon*> equipe;
         string champ;
 
-        getline(ss, nom, ',');     // nom du maître
+        getline(ss, nom, ',');     
 
         while (getline(ss, champ, ',')) {
             if (!champ.empty() && pokedex.count(champ)) {
@@ -145,7 +145,7 @@ vector<Joueur*> chargerJoueursDepuisCSV(const string& nomFichier, const map<stri
 
 
 void AfficheStatPokemon(vector<Pokemon*> equipe){
-    for(Pokemon* p: equipe){ //pas encore faire si 2 type
+    for(Pokemon* p: equipe){ 
         p->afficher();
     
     }
@@ -157,7 +157,6 @@ void RecupPv(vector<Pokemon*> equipe){
     }
 };
 
-//sans & modifie une copie
 void ChangerOrdre(vector<Pokemon*>& equipe, int idx1, int idx2){
     Pokemon* tmp = equipe[idx1];
     equipe[idx1] = equipe[idx2];
@@ -170,8 +169,6 @@ void AfficherStatJoueur(Joueur* j1){
     cout << "Nombre de défaite: " << j1->getNb_defaite() << endl;
 
 };
-
-//void AffronterGymnase()
 
 #define RESET   "\033[0m"
 #define BOLD    "\033[1m"
@@ -212,6 +209,7 @@ int main()
     vector<Joueur*> tousLesJoueurs = chargerJoueursDepuisCSV("data/joueur.csv", pokedex);
     Joueur* joueurActif = tousLesJoueurs[0]; // Par défaut : Sacha
     vector<Maitre*> maitres = chargerMaitresDepuisCSV("data/maitres.csv", pokedex);
+    joueurActif->setNb_badge(tousLesLeaders.size()); //pour pouvoir affronter les maitres
 
     int choix;
     do {
@@ -269,7 +267,6 @@ int main()
     
             case 6:
                     cout << joueurActif->getNb_badge() << " badge(s) obtenu(s)." << endl;
-                    joueurActif->setNb_badge(tousLesLeaders.size());
                     if (joueurActif->getNb_badge() == tousLesLeaders.size()) {
                         cout << "\nChoisis un maître à affronter :" << endl;
                     

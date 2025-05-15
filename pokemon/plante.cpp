@@ -11,6 +11,15 @@ void Plante::attaquer(Pokemon* cible)
     int pv_final = pv - degat_attaque;
     if (pv_final<0) pv_final = 0;
     cible->setPv(pv_final);
+    if(mult["Plante"]>1)
+    {
+        cout<<"C'est super efficace (x"<<mult["Plante"]<<")! ";
+    }
+    else if (mult["Plante"]<1)
+    {
+        cout<<"C'est peu efficace (x"<<mult["Plante"]<<")! ";
+    }
+    cout<<"Cette attaque inflige "<<degat_attaque<<" degats."<<endl;
 };
 
 void Plante::interagir() const{

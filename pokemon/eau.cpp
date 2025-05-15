@@ -11,6 +11,15 @@ void Eau::attaquer(Pokemon* cible)
     int pv_final = pv - degat_attaque;
     if (pv_final<0) pv_final = 0;
     cible->setPv(pv_final);
+    if(mult["Eau"]>1)
+    {
+        cout<<"C'est super efficace (x"<<mult["Eau"]<<")! ";
+    }
+    else if (mult["Eau"]<1)
+    {
+        cout<<"C'est peu efficace (x"<<mult["Eau"]<<")! ";
+    }
+    cout<<"Cette attaque inflige "<<degat_attaque<<" degats."<<endl;
 };
 
 void Eau::interagir() const{
