@@ -1,0 +1,35 @@
+[33mcommit 7fd4ce15cc3cfd8684a91cbbb6cc272fceda2433[m
+Author: Atoms919 <allorytom@gmail.com>
+Date:   Thu May 15 16:33:46 2025 +0200
+
+    dernieres corrections
+
+ delete mode 100644 pokemon/pokemon.exe
+
+[33mcommit 97bfe8484e81df0b7a1cc68f1b2384f9ecdaf7d6[m
+Author: Rico9973 <richardr26.huang@gmail.com>
+Date:   Fri May 2 10:33:14 2025 +0200
+
+    Manque plus que ajouter des clones de pokemon
+
+ delete mode 100644 pokemon/electrik.cpp
+ delete mode 100644 pokemon/electrik.h
+ delete mode 100644 pokemon/glace.cpp
+ delete mode 100644 pokemon/glace.h
+
+[33mcommit c5574546395f4900ea56fbaf34edd1daae90eb7b[m
+Author: Rico9973 <richardr26.huang@gmail.com>
+Date:   Sun Apr 27 02:01:29 2025 +0200
+
+    Menu (1-5) 6,7 marche pas
+
+ delete mode 100644 pokemon/combat.cpp
+ delete mode 100644 pokemon/combat.h
+
+[33mcommit ab659d0c539ae3492fd339d474461f6f7c8d706b[m
+Author: Atoms919 <allorytom@gmail.com>
+Date:   Tue Apr 15 18:11:42 2025 +0200
+
+    commit 3
+
+ delete mode 100644 pokemon.cpp

@@ -170,6 +170,18 @@ void AfficherStatJoueur(Joueur* j1){
 
 };
 
+// Fonction pour lancer une musique en arrière-plan
+void playMusic(const string& filepath) {
+    string command = "start \"musiquePokemon\" /min ffplay.exe -nodisp -autoexit \"" + filepath + "\"";
+    system(command.c_str());
+}
+
+// Fonction pour arrêter la musique en cours
+void stopMusic() {
+    system("taskkill /IM ffplay.exe /F >nul 2>&1");
+}
+
+
 #define RESET   "\033[0m"
 #define BOLD    "\033[1m"
 #define GREEN   "\033[32m"
@@ -211,8 +223,12 @@ int main()
     vector<Maitre*> maitres = chargerMaitresDepuisCSV("data/maitres.csv", pokedex);
     joueurActif->setNb_badge(tousLesLeaders.size()); //pour pouvoir affronter les maitres
 
+
+
+    playMusic("musique/generique.mp3");
     int choix;
     do {
+       
         afficherMenu();
         cin >> choix;
     
@@ -257,11 +273,17 @@ int main()
                 if (choix5 > 0 && choix5 <= tousLesLeaders.size()) {
                     Leader_Gym* leaderChoisi = tousLesLeaders[choix5 - 1];
                     Combat* c = new Combat(*joueurActif, *leaderChoisi);
+                    stopMusic();
+                    playMusic("musique/combat_ost.mp3");
+
                     c->demarrer();
                     RecupPv(leaderChoisi->getListe_pokemon());
                 } else {
                     cout << "Retour au menu principal." << endl;
                 }
+
+                stopMusic();
+                playMusic("musique/generique.mp3");
                 pause();
                 break;
     
@@ -281,6 +303,9 @@ int main()
                     if (choixMaitre > 0 && choixMaitre <= maitres.size()) {
                         Maitre* maitreChoisi = maitres[choixMaitre - 1];
                         Combat* c = new Combat(*joueurActif, *maitreChoisi);
+                        stopMusic();
+                        stopMusic();
+                        playMusic("musique/combat-maitre.mp3");
                         c->demarrer();
                         RecupPv(maitreChoisi->getListe_pokemon());
                     } else {
@@ -290,6 +315,9 @@ int main()
                 } else {
                     cout << "\nVous n'avez pas obtenu tous les badges pour affronter un maître." << endl;
                 }
+
+                stopMusic();
+                playMusic("musique/generique.mp3");
                 pause();
                 break;
             
@@ -348,6 +376,7 @@ int main()
     
     } while (choix != 0);
     
+    stopMusic();
 
     return 0;
 
